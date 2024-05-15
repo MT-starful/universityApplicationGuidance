@@ -1,12 +1,12 @@
 <template>
-  <div style="margin-bottom: 150px;">
+  <div class="container">
     <el-backtop :right="20" :bottom="80" />
     <router-view />
   </div>
 
   <el-card class="tab-bar">
-    <el-tabs v-model="activeNav" tab-position="bottom" :stretch="true">
-      <el-tab-pane name="first">
+    <el-tabs v-model="activeTab" tab-position="bottom" :stretch="true">
+      <el-tab-pane :name="constant.tabBar.DESCRIPTION">
         <template #label>
           <el-icon>
             <Opportunity />
@@ -15,30 +15,30 @@
         </template>
       </el-tab-pane>
 
-      <el-tab-pane name="second">
+      <el-tab-pane :name="constant.tabBar.DATA">
         <template #label>
           <el-icon>
-            <Opportunity />
+            <Histogram />
           </el-icon>
-          <span>说明</span>
+          <span>数据</span>
         </template>
       </el-tab-pane>
 
-      <el-tab-pane name="third">
+      <el-tab-pane :name="constant.tabBar.NEWS">
         <template #label>
           <el-icon>
-            <Opportunity />
+            <Management />
           </el-icon>
-          <span>说明</span>
+          <span>官讯</span>
         </template>
       </el-tab-pane>
 
-      <el-tab-pane name="fourth">
+      <el-tab-pane :name="constant.tabBar.MATERIAL">
         <template #label>
           <el-icon>
-            <Opportunity />
+            <List />
           </el-icon>
-          <span>说明</span>
+          <span>资料</span>
         </template>
       </el-tab-pane>
     </el-tabs>
@@ -46,20 +46,30 @@
 </template>
 
 <script>
-import { Opportunity } from "@element-plus/icons-vue";
+import { Histogram, List, Management, Opportunity } from "@element-plus/icons-vue";
+import constant from "@/constant/constant.js";
 
 export default {
   name: "homePage",
-  components: { Opportunity },
+  computed: {
+    constant() {
+      return constant
+    }
+  },
+  components: { List, Management, Histogram, Opportunity },
   data() {
     return {
-      activeNav: 'first',
+      activeTab: constant.tabBar.DATA,
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
+.container {
+  margin-bottom: 150px;
+}
+
 .tab-bar {
   position: fixed;
   bottom: 0;
