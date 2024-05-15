@@ -1,4 +1,9 @@
 <template>
+  <div style="margin-bottom: 150px;">
+    <el-backtop :right="20" :bottom="80" />
+    <router-view />
+  </div>
+
   <el-card class="tab-bar">
     <el-tabs v-model="activeNav" tab-position="bottom" :stretch="true">
       <el-tab-pane name="first">

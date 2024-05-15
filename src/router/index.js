@@ -6,6 +6,14 @@ const router = createRouter({
     path: '/',
     name: 'home',
     component: () => import('@/views/homePage.vue'),
+    redirect: '/collegeApplicationGuidance/filingLineSearch',
+    children: [
+      {
+        path: '/collegeApplicationGuidance/filingLineSearch',
+        name: 'filingLineSearch',
+        component: () => import('@/views/filingLineSearch.vue'),
+      },
+    ]
   }]
 });
 
