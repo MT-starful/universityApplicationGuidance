@@ -30,7 +30,7 @@
     </el-form-item>
   </el-form>
 
-  <el-button style="width: 100%;" type="primary">查询</el-button>
+  <el-button style="width: 100%;" type="primary" @click="search">查询</el-button>
 </template>
 
 <script>
@@ -41,6 +41,11 @@ export default {
       year: '',
       subject: '',
       batch: '',
+    }
+  },
+  methods: {
+    search() {
+      this.$router.push('/collegeApplicationGuidance/filingLineView');
     }
   },
 }

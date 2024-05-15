@@ -13,6 +13,11 @@ const router = createRouter({
         name: 'filingLineSearch',
         component: () => import('@/views/filingLineSearch.vue'),
       },
+      {
+        path: '/collegeApplicationGuidance/filingLineView',
+        name: 'filingLineView',
+        component: () => import('@/views/filingLineView.vue'),
+      },
     ]
   }]
 });
