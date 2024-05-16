@@ -1,42 +1,36 @@
 <template>
-  <el-page-header>
+  <el-page-header @back="goBack">
     <template #content>
-      <span> Title </span>
+      <span>{{ title }}</span>
     </template>
   </el-page-header>
 
-  <el-divider style="margin: 8px 0;" />
+  <el-divider class="head-divider" />
 
   <el-input v-model="schoolName" placeholder="学校名称" prefix-icon="Search" clearable />
 
-  <el-form style="margin-top: 12px;">
+  <el-form class="filter-form">
     <el-form-item label="筛选区间类型：">
       <el-radio-group v-model="searchType">
-        <el-radio value="score">按分数</el-radio>
-        <el-radio value="rank">按排名</el-radio>
+        <el-radio :value="constant.searchType.SCORE">按分数</el-radio>
+        <el-radio :value="constant.searchType.RANK">按排名</el-radio>
       </el-radio-group>
     </el-form-item>
 
-    <el-form-item v-if="searchType === 'score'" label="分数区间：">
+    <el-form-item v-if="searchType === constant.searchType.SCORE" label="分数区间：">
       <el-input v-model="maxScore" placeholder="最高分（不填默认为750）" type="number" clearable />
-      <el-input style="margin-top: 4px;" v-model="minScore" placeholder="最低分（不填默认为0）" type="number" clearable />
+      <el-input class="filter-input" v-model="minScore" placeholder="最低分（不填默认为0）" type="number" clearable />
     </el-form-item>
 
-    <el-form-item v-if="searchType === 'rank'" label="排名区间：">
+    <el-form-item v-if="searchType === constant.searchType.RANK" label="排名区间：">
       <el-input v-model="maxRank" placeholder="最高排名（不填默认为1）" type="number" clearable />
-      <el-input
-        style="margin-top: 4px;"
-        v-model="minRank"
-        placeholder="最低排名（不填默认为无穷大）"
-        type="number"
-        clearable
-      />
+      <el-input class="filter-input" v-model="minRank" placeholder="最低排名（不填默认无穷大）" type="number" clearable />
     </el-form-item>
   </el-form>
 
-  <el-divider style="margin: 0;" />
+  <el-divider class="table-head-divider" />
 
-  <el-table :data="filterPitchLineList" stripe>
+  <el-table :data="filterFillingLineList" stripe>
     <el-table-column prop="code" label="院校代码" width="60px" />
     <el-table-column prop="name" label="院校名称" min-width="50px" />
     <el-table-column prop="score" label="投档线" width="70px" />
@@ -47,36 +41,49 @@
   </el-table>
 
   <el-pagination
-    style="display: flex;flex-wrap: wrap;justify-content: center;margin-top: 8px;"
+    class="pagination"
     @current-change="page => pageData.currentPage = page"
     @size-change="size => pageData.pageSize = size"
     :current-page="pageData.currentPage"
     :page-size="pageData.pageSize"
     :page-sizes="pageData.pageSizes"
     :pager-count="pageData.pagerCount"
-    :total="pitchLineList.length"
+    :total="fillingLineList.length"
     layout="total, prev, pager, next,sizes, jumper"
   />
 </template>
 
 <script>
-import cropPage from "../../../universityApplicationGuidance - 副本/src/tools/paginationTool.js";
+import { useRoute } from "vue-router";
+import constant from "@/constant/constant.js";
+import map from '@/map/map.js'
+import cropPage from "@/tools/paginationTool.js";
+
 export default {
   name: "filingLineView",
   computed: {
-    filterPitchLineList() {
-      return cropPage(this.pitchLineList, this.pageData.currentPage, this.pageData.pageSize);
+    constant() {
+      return constant;
+    },
+    title() {
+      return `${this.year}${map.subjectMap.get(this.subject)}${map.batchMap.get(this.batch)}投档线`;
+    },
+    filterFillingLineList() {
+      return cropPage(this.fillingLineList, this.pageData.currentPage, this.pageData.pageSize);
     }
   },
   data() {
     return {
+      year: '',
+      subject: '',
+      batch: '',
       schoolName: '',
-      searchType: 'score',
+      searchType: constant.searchType.SCORE,
       maxScore: '',
       minScore: '',
       maxRank: '',
       minRank: '',
-      pitchLineList: [
+      fillingLineList: [
         { code: 1, name: '上海海事大学大连学院', score: 685, rank: 888888 },
         { code: 2, name: '上海海事大学大连学院', score: 685, rank: 888888 },
       ],
@@ -88,8 +95,13 @@ export default {
       },
     }
   },
+  methods: {
+    goBack() {
+      this.$router.push('/filingLineSearch');
+    },
+  },
   mounted() {
-    this.pitchLineList = [];
+    this.fillingLineList = [];
     for (let i = 0; i <= 75; i++) {
       const obj = {
         code: i,
@@ -97,11 +109,42 @@ export default {
         score: 685,
         rank: 888888,
       };
-      this.pitchLineList.push(obj);
+      this.fillingLineList.push(obj);
+    }
+
+    const route = useRoute();
+    this.year = route.query.year;
+    this.subject = route.query.subject;
+    this.batch = route.query.batch;
+
+    if (!this.year || !this.subject || !this.batch) {
+      this.goBack();
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
+.head-divider {
+  margin: 8px 0;
+}
+
+.filter-form {
+  margin-top: 12px;
+
+  .filter-input {
+    margin-top: 4px;
+  }
+}
+
+.table-head-divider {
+  margin: 0;
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 8px;
+}
 </style>
