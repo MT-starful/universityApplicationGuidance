@@ -1,20 +1,20 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(),
   routes: [{
     path: '/',
     name: 'home',
     component: () => import('@/views/homePage.vue'),
-    redirect: '/collegeApplicationGuidance/filingLineSearch',
+    redirect: '/filingLineSearch',
     children: [
       {
-        path: '/collegeApplicationGuidance/filingLineSearch',
+        path: '/filingLineSearch',
         name: 'filingLineSearch',
         component: () => import('@/views/filingLineSearch.vue'),
       },
       {
-        path: '/collegeApplicationGuidance/filingLineView',
+        path: '/filingLineView',
         name: 'filingLineView',
         component: () => import('@/views/filingLineView.vue'),
       },
