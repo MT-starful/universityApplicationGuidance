@@ -4,8 +4,6 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes: [{
     path: '/',
-    name: 'home',
-    component: () => import('@/views/homePage.vue'),
     redirect: '/filingLineSearch',
     children: [
       {
