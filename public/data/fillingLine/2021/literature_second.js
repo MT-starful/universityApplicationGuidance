@@ -1,6 +1,6 @@
 export default [
   { code: '0284', name: '上海海关学院', score: 582, rank: 6759 },
-  { code: '1751', name: '海南大学▲', score: 580, rank: 7167 },
+  { code: '1751', name: '海南大学', score: 580, rank: 7167 },
   { code: '2427', name: '集美大学', score: 580, rank: 7115 },
   { code: '2363', name: '浙江传媒学院', score: 577, rank: 7996 },
   { code: '2778', name: '四川外国语大学', score: 575, rank: 8376 },
@@ -357,7 +357,7 @@ export default [
   { code: '3311', name: '东南大学成贤学院', score: 527, rank: 29215 },
   { code: '3617', name: '湖南中医药大学湘杏学院', score: 527, rank: 28901 },
   { code: '4702', name: '重庆第二师范学院', score: 527, rank: 28831 },
-  { code: '8151', name: '南昌大学▲', score: 527, rank: 29173 },
+  { code: '8151', name: '南昌大学', score: 527, rank: 29173 },
   { code: '3325', name: '江苏科技大学苏州理工学院', score: 526, rank: 29354 },
   { code: '3601', name: '长沙理工大学城南学院', score: 526, rank: 29468 },
   { code: '5173', name: '集宁师范学院', score: 526, rank: 29332 },

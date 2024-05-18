@@ -326,7 +326,7 @@ export default [
   { code: '2253', name: '牡丹江师范学院', score: 502, rank: 30413 },
   { code: '8232', name: '萍乡学院', score: 502, rank: 30446 },
   { code: '2846', name: '兴义民族师范学院', score: 502, rank: 30458 },
-  { code: '8151', name: '南昌大学▲', score: 502, rank: 30468 },
+  { code: '8151', name: '南昌大学', score: 502, rank: 30468 },
   { code: '2736', name: '百色学院', score: 502, rank: 30482 },
   { code: '2252', name: '黑龙江八一农垦大学', score: 502, rank: 30518 },
   { code: '2225', name: '通化师范学院', score: 502, rank: 30584 },

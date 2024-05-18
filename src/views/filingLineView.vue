@@ -7,30 +7,30 @@
 
   <el-divider class="head-divider" />
 
-  <el-input v-model="schoolName" placeholder="学校名称" prefix-icon="Search" clearable />
+  <el-input v-model.trim="schoolName" placeholder="学校名称" prefix-icon="Search" clearable />
 
   <el-form class="filter-form">
     <el-form-item label="筛选区间类型：">
-      <el-radio-group v-model="searchType">
+      <el-radio-group v-model="searchType" @change="searchTypeChange">
         <el-radio :value="constant.searchType.SCORE">按分数</el-radio>
         <el-radio :value="constant.searchType.RANK">按排名</el-radio>
       </el-radio-group>
     </el-form-item>
 
     <el-form-item v-if="searchType === constant.searchType.SCORE" label="分数区间：">
-      <el-input v-model="maxScore" placeholder="最高分（不填默认为750）" type="number" clearable />
-      <el-input class="filter-input" v-model="minScore" placeholder="最低分（不填默认为0）" type="number" clearable />
+      <el-input v-model="maxNum" placeholder="最高分（不填默认为750）" type="number" clearable />
+      <el-input class="filter-input" v-model="minNum" placeholder="最低分（不填默认为0）" type="number" clearable />
     </el-form-item>
 
     <el-form-item v-if="searchType === constant.searchType.RANK" label="排名区间：">
-      <el-input v-model="maxRank" placeholder="最高排名（不填默认为1）" type="number" clearable />
-      <el-input class="filter-input" v-model="minRank" placeholder="最低排名（不填默认无穷大）" type="number" clearable />
+      <el-input v-model="minNum" placeholder="最高排名（不填默认为1）" type="number" clearable />
+      <el-input class="filter-input" v-model="maxNum" placeholder="最低排名（不填默认无穷大）" type="number" clearable />
     </el-form-item>
   </el-form>
 
   <el-divider class="table-head-divider" />
 
-  <el-table :data="filterFillingLineList" stripe>
+  <el-table :data="displayedFillingLineList" stripe>
     <el-table-column prop="code" label="院校代码" width="60px" />
     <el-table-column prop="name" label="院校名称" min-width="50px" />
     <el-table-column prop="score" label="投档线" width="70px" />
@@ -48,7 +48,7 @@
     :page-size="pageData.pageSize"
     :page-sizes="pageData.pageSizes"
     :pager-count="pageData.pagerCount"
-    :total="fillingLineList.length"
+    :total="filterFillingLineList.length"
     layout="total, prev, pager, next,sizes, jumper"
   />
 </template>
@@ -70,7 +70,33 @@ export default {
       return `${this.year}${map.subjectMap.get(this.subject)}${map.batchMap.get(this.batch)}投档线`;
     },
     filterFillingLineList() {
-      return cropPage(this.fillingLineList, this.pageData);
+      let fillingLine = this.fillingLineList;
+      fillingLine = fillingLine.filter(line => line.name.indexOf(this.schoolName) !== -1);
+
+      // 按分数或排名进行过滤
+      let maxNum;
+      let minNum;
+      maxNum = Number.parseInt(this.maxNum);
+      minNum = Number.parseInt(this.minNum);
+
+      if (isNaN(maxNum)) {
+        maxNum = Infinity;
+      }
+      if (isNaN(minNum)) {
+        minNum = -1;
+      }
+
+      if (this.searchType === constant.searchType.SCORE) {
+        fillingLine = fillingLine.filter(line => line.score <= maxNum && line.score >= minNum);
+      } else if (this.searchType === constant.searchType.RANK) {
+        fillingLine = fillingLine.filter(line => line.rank <= maxNum && line.rank >= minNum);
+      } else { /* empty */
+      }
+
+      return fillingLine;
+    },
+    displayedFillingLineList() {
+      return cropPage(this.filterFillingLineList, this.pageData);
     }
   },
   data() {
@@ -80,10 +106,8 @@ export default {
       batch: '',
       schoolName: '',
       searchType: constant.searchType.SCORE,
-      maxScore: '',
-      minScore: '',
-      maxRank: '',
-      minRank: '',
+      maxNum: '',
+      minNum: '',
       fillingLineList: [],
       pageData: {
         currentPage: 1,
@@ -97,8 +121,13 @@ export default {
     goBack() {
       this.$router.push('/filingLineSearch');
     },
+    searchTypeChange() {
+      this.maxNum = '';
+      this.minNum = '';
+    },
   },
   async mounted() {
+    // 获取query参数
     const route = useRoute();
     this.year = route.query.year;
     this.subject = route.query.subject;
