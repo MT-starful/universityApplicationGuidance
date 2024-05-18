@@ -1,7 +1,7 @@
 <template>
   <NavBar />
   <div class="container">
-    <el-backtop :right="20" :bottom="80" />
+    <el-backtop :right="24" :bottom="96" />
     <router-view />
   </div>
 </template>
@@ -17,6 +17,6 @@ export default {
 
 <style scoped lang="scss">
 .container {
-  margin: 50px 0 150px;
+  margin: 48px 0 156px;
 }
 </style>

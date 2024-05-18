@@ -9,7 +9,7 @@
 
       <el-tab-pane :name="constant.dataNavBar.LIBRARY">
         <template #label>
-          <span>大学专业库</span>
+          <span>院校专业库</span>
         </template>
       </el-tab-pane>
     </el-tabs>
