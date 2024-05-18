@@ -58,6 +58,7 @@ import { useRoute } from "vue-router";
 import constant from "@/constant/constant.js";
 import map from '@/map/map.js'
 import cropPage from "@/tools/paginationTool.js";
+import getFillingLineList from "@/tools/fillingLineTool.js";
 
 export default {
   name: "filingLineView",
@@ -69,7 +70,7 @@ export default {
       return `${this.year}${map.subjectMap.get(this.subject)}${map.batchMap.get(this.batch)}投档线`;
     },
     filterFillingLineList() {
-      return cropPage(this.fillingLineList, this.pageData.currentPage, this.pageData.pageSize);
+      return cropPage(this.fillingLineList, this.pageData);
     }
   },
   data() {
@@ -83,10 +84,7 @@ export default {
       minScore: '',
       maxRank: '',
       minRank: '',
-      fillingLineList: [
-        { code: 1, name: '上海海事大学大连学院', score: 685, rank: 888888 },
-        { code: 2, name: '上海海事大学大连学院', score: 685, rank: 888888 },
-      ],
+      fillingLineList: [],
       pageData: {
         currentPage: 1,
         pageSize: 10,
@@ -100,26 +98,16 @@ export default {
       this.$router.push('/filingLineSearch');
     },
   },
-  mounted() {
-    this.fillingLineList = [];
-    for (let i = 0; i <= 75; i++) {
-      const obj = {
-        code: i,
-        name: '上海海事大学大连学院',
-        score: 685,
-        rank: 888888,
-      };
-      this.fillingLineList.push(obj);
-    }
-
+  async mounted() {
     const route = useRoute();
     this.year = route.query.year;
     this.subject = route.query.subject;
     this.batch = route.query.batch;
-
     if (!this.year || !this.subject || !this.batch) {
       this.goBack();
     }
+
+    this.fillingLineList = await getFillingLineList(this.year, this.subject, this.batch);
   }
 }
 </script>
