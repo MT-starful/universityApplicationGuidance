@@ -7,7 +7,7 @@
 import TabBar from "@/views/tabBar.vue";
 
 export default {
-  name: "app",
+  name: 'app',
   components: { TabBar },
 }
 </script>

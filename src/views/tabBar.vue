@@ -1,6 +1,6 @@
 <template>
   <el-card class="tab-bar">
-    <el-tabs v-model="activeTab" tab-position="bottom" :stretch="true">
+    <el-tabs v-model="activeTab" tab-position="bottom" :stretch="true" @tab-click="tabChange">
       <el-tab-pane :name="constant.tabBar.DESCRIPTION">
         <template #label>
           <el-icon>
@@ -45,7 +45,7 @@ import { Histogram, List, Management, Opportunity } from "@element-plus/icons-vu
 import constant from "@/constant/constant.js";
 
 export default {
-  name: "tabBar",
+  name: 'tabBar',
   computed: {
     constant() {
       return constant
@@ -54,9 +54,17 @@ export default {
   components: { List, Management, Histogram, Opportunity },
   data() {
     return {
-      activeTab: constant.tabBar.DATA,
+      activeTab: '',
     }
-  }
+  },
+  methods: {
+    tabChange(option) {
+      this.$router.push(`/${option.props.name}`);
+    },
+  },
+  mounted() {
+    this.activeTab = window.location.hash.split('/')[1];
+  },
 }
 </script>
 

@@ -61,7 +61,7 @@ import cropPage from "@/tools/paginationTool.js";
 import getFillingLineList from "@/tools/fillingLineTool.js";
 
 export default {
-  name: "filingLineView",
+  name: 'filingLineView',
   computed: {
     constant() {
       return constant;
@@ -119,7 +119,7 @@ export default {
   },
   methods: {
     goBack() {
-      this.$router.push('/filingLineSearch');
+      this.$router.push(`/${constant.tabBar.DATA}/filingLineSearch`);
     },
     searchTypeChange() {
       this.maxNum = '';

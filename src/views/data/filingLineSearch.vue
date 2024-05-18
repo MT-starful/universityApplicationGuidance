@@ -37,7 +37,7 @@
 import constant from "@/constant/constant.js";
 
 export default {
-  name: "filingLineSearch",
+  name: 'filingLineSearch',
   computed: {
     constant() {
       return constant;
@@ -60,7 +60,7 @@ export default {
         return;
       }
       this.$router.push({
-        path: '/filingLineView',
+        path: `/${constant.tabBar.DATA}/filingLineView`,
         query: { year: this.year, subject: this.subject, batch: this.batch },
       });
     }
