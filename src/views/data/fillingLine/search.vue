@@ -60,7 +60,7 @@ export default {
         return;
       }
       this.$router.push({
-        path: `/${constant.tabBar.DATA}/filingLineView`,
+        path: `/${constant.tabBar.DATA}/${constant.dataNavBar.FILLING_LINE}/view`,
         query: { year: this.year, subject: this.subject, batch: this.batch },
       });
     }

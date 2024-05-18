@@ -1,4 +1,5 @@
 <template>
+  <NavBar />
   <div class="container">
     <el-backtop :right="20" :bottom="80" />
     <router-view />
@@ -6,13 +7,16 @@
 </template>
 
 <script>
+import NavBar from "@/views/data/navBar.vue";
+
 export default {
-  name: 'coreData'
+  name: 'coreData',
+  components: { NavBar },
 }
 </script>
 
 <style scoped lang="scss">
 .container {
-  margin-bottom: 150px;
+  margin: 50px 0 150px;
 }
 </style>

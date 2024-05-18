@@ -119,7 +119,7 @@ export default {
   },
   methods: {
     goBack() {
-      this.$router.push(`/${constant.tabBar.DATA}/filingLineSearch`);
+      this.$router.push(`/${constant.tabBar.DATA}/${constant.dataNavBar.FILLING_LINE}/search`);
     },
     searchTypeChange() {
       this.maxNum = '';

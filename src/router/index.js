@@ -16,17 +16,41 @@ const router = createRouter({
         path: `/${constant.tabBar.DATA}`,
         name: constant.tabBar.DATA,
         component: () => import('@/views/coreData.vue'),
-        redirect: `/${constant.tabBar.DATA}/filingLineSearch`,
+        redirect: `/${constant.tabBar.DATA}/${constant.dataNavBar.FILLING_LINE}`,
         children: [
+          // 投档线
           {
-            path: `/${constant.tabBar.DATA}/filingLineSearch`,
-            name: 'filingLineSearch',
-            component: () => import('@/views/data/filingLineSearch.vue')
+            path: `/${constant.tabBar.DATA}/${constant.dataNavBar.FILLING_LINE}`,
+            redirect: `/${constant.tabBar.DATA}/${constant.dataNavBar.FILLING_LINE}/search`,
+            children: [
+              {
+                path: `/${constant.tabBar.DATA}/${constant.dataNavBar.FILLING_LINE}/search`,
+                name: 'filingLineSearch',
+                component: () => import('@/views/data/fillingLine/search.vue')
+              },
+              {
+                path: `/${constant.tabBar.DATA}/${constant.dataNavBar.FILLING_LINE}/view`,
+                name: 'filingLineView',
+                component: () => import('@/views/data/fillingLine/view.vue')
+              },
+            ],
           },
+          // 大学专业库
           {
-            path: `/${constant.tabBar.DATA}/filingLineView`,
-            name: 'filingLineView',
-            component: () => import('@/views/data/filingLineView.vue')
+            path: `/${constant.tabBar.DATA}/${constant.dataNavBar.LIBRARY}`,
+            redirect: `/${constant.tabBar.DATA}/${constant.dataNavBar.LIBRARY}/search`,
+            children: [
+              {
+                path: `/${constant.tabBar.DATA}/${constant.dataNavBar.LIBRARY}/search`,
+                name: 'librarySearch',
+                component: () => import('@/views/data/library/search.vue')
+              },
+              {
+                path: `/${constant.tabBar.DATA}/${constant.dataNavBar.LIBRARY}/view`,
+                name: 'libraryView',
+                component: () => import('@/views/data/library/view.vue')
+              },
+            ],
           },
         ],
       },
