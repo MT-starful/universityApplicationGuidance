@@ -1,1 +1,0 @@
-const t={DESCRIPTION:"description",DATA:"data",NEWS:"news",MATERIAL:"material"},c={SCIENCE:"science",LITERATURE:"literature"},s={FIRST:"first",SECOND:"second"},e={SCORE:"score",RANK:"rank"},a={tabBar:t,subject:c,batch:s,searchType:e};export{a as c};
