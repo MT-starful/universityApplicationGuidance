@@ -20,8 +20,8 @@ export function getUniversityProvinceCityList(universityList) {
 
   // 获取所有城市列表，按省份进行区分
   const allCityList = provinceList.map(province => {
-    const cityUniversityList = universityList.filter(school => school.province === province);
-    const cityList = cityUniversityList.map(school => school.city);
+    const provinceUniversityList = universityList.filter(school => school.province === province);
+    const cityList = provinceUniversityList.map(school => school.city);
     return {
       province,
       cityList: removeDuplicate(cityList),

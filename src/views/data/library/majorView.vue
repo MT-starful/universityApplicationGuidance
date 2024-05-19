@@ -11,14 +11,21 @@
 
   <el-form class="filter-form">
     <el-form-item label="门类：">
-      <el-select v-model="classification" @change="categoryChange">
+      <el-select v-model="classification" @change="classificationChange">
         <el-option :label="constant.common.all" :value="constant.common.all" />
+        <el-option
+          v-for="classification in classificationList"
+          :key="classification"
+          :label="classification"
+          :value="classification"
+        />
       </el-select>
     </el-form-item>
 
     <el-form-item label="专业类：">
-      <el-select v-model="category">
+      <el-select v-model="category" :disabled="categoryList.length === 0">
         <el-option :label="constant.common.all" :value="constant.common.all" />
+        <el-option v-for="category in categoryList" :key="category" :lang="category" :value="category" />
       </el-select>
     </el-form-item>
   </el-form>
@@ -49,7 +56,8 @@
 
 <script>
 import constant from "@/constant/constant.js";
-import { getMajorListList } from "@/tools/majorLibraryTool.js";
+import { getMajorListList, getMajorClassificationCategoryList } from "@/tools/majorLibraryTool.js";
+import cropPage from "@/tools/paginationTool.js";
 
 export default {
   name: 'majorView',
@@ -57,19 +65,39 @@ export default {
     constant() {
       return constant;
     },
+    categoryList() {
+      const classificationInfo = this.allCategoryList.find(classificationInfo =>
+        classificationInfo.classification === this.classification);
+      return classificationInfo?.categoryList ?? [];
+    },
     filterMajorList() {
-      let major = this.majorList;
-      return major;
+      let majors = this.majorList;
+      majors = majors.filter(major =>
+        major.classification.indexOf(this.majorName) !== -1
+        || major.category.indexOf(this.majorName) !== -1
+        || major.name.indexOf(this.majorName) !== -1);
+
+      if (this.classification !== constant.common.all) {
+        majors = majors.filter(major => major.classification === this.classification);
+      }
+
+      if (this.category !== constant.common.all) {
+        majors = majors.filter(major => major.category === this.category);
+      }
+
+      return majors;
     },
     displayMajorList() {
-      return this.filterMajorList.slice(0, 20);
+      return cropPage(this.filterMajorList, this.pageData);
     }
   },
   data() {
     return {
       majorName: '',
-      classification: '',
-      category: '',
+      classificationList: [],
+      classification: constant.common.all,
+      allCategoryList: [],
+      category: constant.common.all,
       majorList: [],
       pageData: {
         currentPage: 1,
@@ -83,11 +111,15 @@ export default {
     goBack() {
       this.$router.push(`/${constant.tabBar.DATA}/${constant.dataNavBar.LIBRARY}/search`);
     },
-    categoryChange() {
+    classificationChange() {
+      this.category = constant.common.all;
     },
   },
   async mounted() {
     this.majorList = await getMajorListList();
+    const classificationCategoryList = getMajorClassificationCategoryList(this.majorList);
+    this.classificationList = classificationCategoryList.classificationList;
+    this.allCategoryList = classificationCategoryList.allCategoryList;
   }
 }
 </script>
