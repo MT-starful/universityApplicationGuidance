@@ -32,7 +32,7 @@
 
   <el-table :data="displayedFillingLineList" stripe>
     <el-table-column prop="code" label="院校代码" width="60px" />
-    <el-table-column prop="name" label="院校名称" min-width="50px" />
+    <el-table-column prop="name" label="院校名称" />
     <el-table-column prop="score" label="投档线" width="70px" />
     <el-table-column prop="rank" label="最低投档线排名" width="80px" />
     <template #empty>

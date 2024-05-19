@@ -7,7 +7,7 @@
 
   <div class="search-item">
     <p>院校</p>
-    <el-button class="search-btn" type="primary">本科院校库</el-button>
+    <el-button class="search-btn" type="primary" @click="goUniversityLibrary">本科院校库</el-button>
   </div>
 
   <div class="search-item">
@@ -17,8 +17,15 @@
 </template>
 
 <script>
+import constant from "@/constant/constant.js";
+
 export default {
-  name: 'librarySearch'
+  name: 'librarySearch',
+  methods: {
+    goUniversityLibrary() {
+      this.$router.push(`/${constant.tabBar.DATA}/${constant.dataNavBar.LIBRARY}/view`);
+    },
+  },
 }
 </script>
 
