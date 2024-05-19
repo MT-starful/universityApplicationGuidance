@@ -46,9 +46,14 @@ const router = createRouter({
                 component: () => import('@/views/data/library/search.vue')
               },
               {
-                path: `/${constant.tabBar.DATA}/${constant.dataNavBar.LIBRARY}/view`,
-                name: 'libraryView',
-                component: () => import('@/views/data/library/view.vue')
+                path: `/${constant.tabBar.DATA}/${constant.dataNavBar.LIBRARY}/universityView`,
+                name: 'universityView',
+                component: () => import('@/views/data/library/universityView.vue')
+              },
+              {
+                path: `/${constant.tabBar.DATA}/${constant.dataNavBar.LIBRARY}/majorView`,
+                name: 'majorView',
+                component: () => import('@/views/data/library/majorView.vue')
               },
             ],
           },

@@ -73,7 +73,7 @@ export default {
       return constant
     },
     cityList() {
-      const provinceInfo = this.allCityList.find(province => province.provinceName === this.province);
+      const provinceInfo = this.allCityList.find(provinceInfo => provinceInfo.province === this.province);
       return provinceInfo?.cityList ?? [];
     },
     filterUniversityList() {

@@ -12,7 +12,7 @@
 
   <div class="search-item">
     <p>专业</p>
-    <el-button class="search-btn" type="primary">本科专业库</el-button>
+    <el-button class="search-btn" type="primary" @click="goMajorLibrary">本科专业库</el-button>
   </div>
 </template>
 
@@ -23,8 +23,11 @@ export default {
   name: 'librarySearch',
   methods: {
     goUniversityLibrary() {
-      this.$router.push(`/${constant.tabBar.DATA}/${constant.dataNavBar.LIBRARY}/view`);
+      this.$router.push(`/${constant.tabBar.DATA}/${constant.dataNavBar.LIBRARY}/universityView`);
     },
+    goMajorLibrary() {
+      this.$router.push(`/${constant.tabBar.DATA}/${constant.dataNavBar.LIBRARY}/majorView`);
+    }
   },
 }
 </script>

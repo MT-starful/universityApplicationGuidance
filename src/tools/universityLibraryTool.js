@@ -23,7 +23,7 @@ export function getUniversityProvinceCityList(universityList) {
     const cityUniversityList = universityList.filter(school => school.province === province);
     const cityList = cityUniversityList.map(school => school.city);
     return {
-      provinceName: province,
+      province,
       cityList: removeDuplicate(cityList),
     }
   });
