@@ -1,16 +1,23 @@
 <template>
-  填报辅导
+  <div v-for="series in seriesList" :key="series.title">
+    <SeriesTitle :title="series.title" />
+    <LinkCard v-for="linkInfo in series.linkList" :key="linkInfo.url" :linkInfo="linkInfo" />
+  </div>
 </template>
 
 <script>
+import LinkCard from "@/components/linkCard.vue";
+import SeriesTitle from "@/components/seriesTitle.vue";
+import { seriesList } from "@/../public/data/news/guidance.js";
+
 export default {
   name: 'applicationGuidance',
-  methods: {
-    goWeb() {
-      // window.open('https://www.baidu.com');
-      window.location.href = 'https://www.baidu.com';
-    },
-  },
+  components: { SeriesTitle, LinkCard },
+  computed: {
+    seriesList() {
+      return seriesList
+    }
+  }
 }
 </script>
 
