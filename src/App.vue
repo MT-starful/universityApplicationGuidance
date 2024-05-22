@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import TabBar from "@/views/tabBar.vue";
+import TabBar from "@/components/tabBar.vue";
 
 export default {
   name: 'app',

@@ -4,6 +4,7 @@ import subject from "@/constant/subject.js";
 import batch from "@/constant/batch.js";
 import searchType from "@/constant/searchType.js";
 import dataNavBar from "@/constant/dataNavBar.js";
+import newsNavBar from "@/constant/newsNavBar.js";
 
 export default {
   common,
@@ -11,5 +12,6 @@ export default {
   subject,
   batch,
   searchType,
-  dataNavBar
+  dataNavBar,
+  newsNavBar,
 }

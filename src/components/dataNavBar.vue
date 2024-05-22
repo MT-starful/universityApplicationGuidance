@@ -20,7 +20,7 @@
 import constant from "@/constant/constant.js";
 
 export default {
-  name: 'navBar',
+  name: 'dataNavBar',
   computed: {
     constant() {
       return constant

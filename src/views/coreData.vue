@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import NavBar from "@/views/data/navBar.vue";
+import NavBar from "@/components/dataNavBar.vue";
 
 export default {
   name: 'coreData',

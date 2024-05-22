@@ -63,6 +63,24 @@ const router = createRouter({
         path: `/${constant.tabBar.NEWS}`,
         name: constant.tabBar.NEWS,
         component: () => import('@/views/officialNews.vue'),
+        redirect: `/${constant.tabBar.NEWS}/${constant.newsNavBar.QUERY_SYSTEM}`,
+        children: [
+          {
+            path: `/${constant.tabBar.NEWS}/${constant.newsNavBar.QUERY_SYSTEM}`,
+            name: 'querySystem',
+            component: () => import('@/views/news/querySystem.vue'),
+          },
+          {
+            path: `/${constant.tabBar.NEWS}/${constant.newsNavBar.GUIDANCE}`,
+            name: 'applicationGuidance',
+            component: () => import('@/views/news/applicationGuidance.vue'),
+          },
+          {
+            path: `/${constant.tabBar.NEWS}/${constant.newsNavBar.MESSAGE}`,
+            name: 'applicationMessage',
+            component: () => import('@/views/news/applicationMessage.vue'),
+          }
+        ],
       },
       {
         path: `/${constant.tabBar.MATERIAL}`,
