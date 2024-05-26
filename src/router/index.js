@@ -65,20 +65,23 @@ const router = createRouter({
         component: () => import('@/views/officialNews.vue'),
         redirect: `/${constant.tabBar.NEWS}/${constant.newsNavBar.QUERY_SYSTEM}`,
         children: [
+          // 查询系统
           {
             path: `/${constant.tabBar.NEWS}/${constant.newsNavBar.QUERY_SYSTEM}`,
             name: 'querySystem',
             component: () => import('@/views/news/querySystem.vue'),
           },
+          // 填报辅导
           {
             path: `/${constant.tabBar.NEWS}/${constant.newsNavBar.GUIDANCE}`,
             name: 'applicationGuidance',
-            component: () => import('@/views/news/applicationGuidance.vue'),
+            component: () => import('@/views/news/guidance.vue'),
           },
+          // 讯息消息
           {
             path: `/${constant.tabBar.NEWS}/${constant.newsNavBar.MESSAGE}`,
             name: 'applicationMessage',
-            component: () => import('@/views/news/applicationMessage.vue'),
+            component: () => import('@/views/news/message.vue'),
           }
         ],
       },
@@ -86,6 +89,24 @@ const router = createRouter({
         path: `/${constant.tabBar.MATERIAL}`,
         name: constant.tabBar.MATERIAL,
         component: () => import('@/views/coachingMaterial.vue'),
+        redirect: `/${constant.tabBar.MATERIAL}/${constant.materialNavBar.PROFILE}`,
+        children: [
+          {
+            path: `/${constant.tabBar.MATERIAL}/${constant.materialNavBar.PROFILE}`,
+            name: 'profileMaterial',
+            component: () => import('@/views/material/profile.vue'),
+          },
+          {
+            path: `/${constant.tabBar.MATERIAL}/${constant.materialNavBar.VIDEO}`,
+            name: 'videoMaterial',
+            component: () => import('@/views/material/video.vue'),
+          },
+          {
+            path: `/${constant.tabBar.MATERIAL}/${constant.materialNavBar.WEBSITE}`,
+            name: 'websiteMaterial',
+            component: () => import('@/views/material/website.vue'),
+          },
+        ]
       },
     ]
   }]

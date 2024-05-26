@@ -1,6 +1,6 @@
 <template>
   <el-card class="card" @click="goWeb">
-    <p class="date">{{ linkInfo.date }}</p>
+    <p class="date" v-if="linkInfo.date">{{ linkInfo.date }}</p>
     <p class="title">{{ linkInfo.title }}</p>
   </el-card>
 </template>
