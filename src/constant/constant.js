@@ -6,6 +6,7 @@ import searchType from "@/constant/searchType.js";
 import dataNavBar from "@/constant/dataNavBar.js";
 import newsNavBar from "@/constant/newsNavBar.js";
 import materialNavBar from "@/constant/materialNavBar.js";
+import profile from "@/constant/profile.js";
 
 export default {
   common,
@@ -16,4 +17,5 @@ export default {
   dataNavBar,
   newsNavBar,
   materialNavBar,
+  profile,
 }

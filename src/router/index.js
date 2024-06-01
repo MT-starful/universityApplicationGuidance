@@ -91,16 +91,29 @@ const router = createRouter({
         component: () => import('@/views/coachingMaterial.vue'),
         redirect: `/${constant.tabBar.MATERIAL}/${constant.materialNavBar.PROFILE}`,
         children: [
+          // 辅导资料
           {
             path: `/${constant.tabBar.MATERIAL}/${constant.materialNavBar.PROFILE}`,
-            name: 'profileMaterial',
-            component: () => import('@/views/material/profile.vue'),
+            children: [
+              {
+                path: `/${constant.tabBar.MATERIAL}/${constant.materialNavBar.PROFILE}`,
+                name: 'profileMaterial',
+                component: () => import('@/views/material/profile/profile.vue'),
+              },
+              {
+                path: `/${constant.tabBar.MATERIAL}/${constant.materialNavBar.PROFILE}/${constant.profile.book}`,
+                name: 'profileBook',
+                component: () => import('@/views/material/profile/book.vue'),
+              }
+            ],
           },
+          // 推荐视频
           {
             path: `/${constant.tabBar.MATERIAL}/${constant.materialNavBar.VIDEO}`,
             name: 'videoMaterial',
             component: () => import('@/views/material/video.vue'),
           },
+          // 推荐网站
           {
             path: `/${constant.tabBar.MATERIAL}/${constant.materialNavBar.WEBSITE}`,
             name: 'websiteMaterial',
