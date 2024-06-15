@@ -104,7 +104,12 @@ const router = createRouter({
                 path: `/${constant.tabBar.MATERIAL}/${constant.materialNavBar.PROFILE}/${constant.profile.book}`,
                 name: 'profileBook',
                 component: () => import('@/views/material/profile/book.vue'),
-              }
+              },
+              {
+                path: `/${constant.tabBar.MATERIAL}/${constant.materialNavBar.PROFILE}/${constant.profile.flow}`,
+                name: 'admissionFlow',
+                component: () => import('@/views/material/profile/flow.vue'),
+              },
             ],
           },
           // 推荐视频
