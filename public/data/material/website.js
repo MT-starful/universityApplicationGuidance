@@ -24,6 +24,11 @@ export const seriesList = [
     linkList: [
       {
         date: '',
+        title: '升学e网通',
+        url: 'https://www.ewt360.com/site-www/home/page',
+      },
+      {
+        date: '',
         title: '百度高考',
         url: 'https://gaokao.baidu.com/',
       },
